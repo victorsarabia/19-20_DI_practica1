@@ -1,0 +1,9 @@
+
+nav {
+	margin: 10px;
+}
+
+input[type="text"] {
+	display: block;
+	margin-bottom: 10px;
+}

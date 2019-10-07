@@ -1,2 +1,4 @@
 conf.php
 **/prueba*.php
+**/prueba/
+**/.DS_Store
