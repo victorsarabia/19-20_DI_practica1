@@ -1,4 +1,38 @@
+##########################
+# Archivo de configuración
 conf.php
+
+
+#####################
+# Archivos de pruebas
 **/prueba*.php
 **/prueba/
+
+
+######################
+# IDEs de programación
+
+# eclipse project file
+.settings/
+.classpath
+.project
+
+# IntelliJ project files
+*.iml
+*.iws
+*.ipr
+.idea/
+
+# NetBeans specific
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+
+
+#######################
+# Archivos del sistema
 **/.DS_Store
