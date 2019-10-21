@@ -10,26 +10,25 @@ $population_sign = isset($population_sign)? $population_sign : null;
 
 ?>
 
-<!-- Lo manda a Index porque si no no se vería la página completa -->
-<form method="post" action="index.php">
-    <fieldset>
-        <legend>Buscador</legend>
 
-        ID: <input type="text" name="ID" value="<?php echo $id?>" />
-        Nombre: <input type="text" name="Name" value="<?php echo $name?>" />
-        Cód. País: <input type="text" name="CountryCode" value="<?php echo $countryCode?>" />
-        Distrito: <input type="text" name="District" value="<?php echo $district?>" />
-        Población:
-            <select name="population_sign">
-                <option value=">" <?php echo $population_sign==">"? "selected":""?>>&gt;</option>
-                <option value="<" <?php echo $population_sign=="<"? "selected":""?>>&lt;</option>
-                <option value="=" <?php echo $population_sign=="="? "selected":""?>>=</option>
-            </select>
-            <input type="text" name="Population" value="<?php echo $population?>" />
+<fieldset>
+    <legend>Buscador</legend>
 
-        <input type="submit" name="Buscar" value="Buscar" />
-        <input type="reset" value="Limpiar" />
+    ID: <input type="text" name="ID" value="<?php echo $id?>" />
+    Nombre: <input type="text" name="Name" value="<?php echo $name?>" />
+    Cód. País: <input type="text" name="CountryCode" value="<?php echo $countryCode?>" />
+    Distrito: <input type="text" name="District" value="<?php echo $district?>" />
+    Población:
+        <select name="population_sign">
+            <option value=">" <?php echo $population_sign==">"? "selected":""?>>&gt;</option>
+            <option value="<" <?php echo $population_sign=="<"? "selected":""?>>&lt;</option>
+            <option value="=" <?php echo $population_sign=="="? "selected":""?>>=</option>
+        </select>
+        <input type="text" name="Population" value="<?php echo $population?>" />
 
-    </fieldset>
+    <input type="submit" name="Buscar" value="Buscar" />
+    <input type="reset" value="Limpiar" />
 
-</form>
+</fieldset>
+
+

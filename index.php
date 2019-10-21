@@ -35,6 +35,10 @@ if (!empty($id)) {
     $district = isset($_POST['District'])? $_POST['District'] : null;
     $population = isset($_POST['Population'])? $_POST['Population'] : null;
     $population_sign = isset($_POST['population_sign'])? $_POST['population_sign'] : null;
+
+    // Recogida de parámetros para el paginador
+    $pagina = isset($_POST['pagina'])? $_POST['pagina'] : null;
+    $num_registros = isset($_POST['num_registros'])? $_POST['num_registros'] : null;
 }
 
 ?>
@@ -42,13 +46,14 @@ if (!empty($id)) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Listado práctica DI 1.2</title>
+	<title>Listado práctica DI 1.3</title>
 	<link rel="stylesheet" type="text/css" href="css/index.css">
 	<link rel="stylesheet" type="text/css" href="css/list.css">
     <link rel="stylesheet" type="text/css" href="css/buscador.css">
+    <link rel="stylesheet" type="text/css" href="css/paginador.css">
 </head>
 <body>	
-	<h1>Práctica DI 1.2</h1>
+	<h1>Práctica DI 1.3</h1>
 	
 	<nav>
 		<form action="form.php" method="POST">
@@ -56,7 +61,11 @@ if (!empty($id)) {
 		</form>
 	</nav>
 
-    <?php require "buscador.php";?>
-	<?php require "list.php";?>
+    <!-- Se abre aquí el formulario para que abarque el buscador y el paginador, si no uno no tendría la información de ambos -->
+    <form method="post" action="index.php">
+    <?php require "buscador.php"?>
+	<?php require "list.php"?>
+    <?php require "paginador.php"?>
+    </form>
 </body>
 </html>

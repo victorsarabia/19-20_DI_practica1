@@ -9,45 +9,79 @@ $district = isset($district)? $district : null;
 $population = isset($population)? $population : null;
 $population_sign = isset($population_sign)? $population_sign : null;
 
+// Recogida de acciones
+$pagina = (isset($_POST['pagina'])? $_POST['pagina'] : 1);
+$num_registros = (isset($_POST['num_registros'])? $_POST['num_registros'] : 10);
+$primero = (isset($_POST['primero'])? true : false);
+$ultimo = (isset($_POST['ultimo'])? true : false);
+$siguiente = (isset($_POST['siguiente'])? true : false);
+$anterior = (isset($_POST['anterior'])? true : false);
+$mostrar = (isset($_POST['mostrar'])? true : false);
+
 
 try {
     // Conexión a BD
     $con = new PDO('mysql:host=localhost;dbname='.DB_NAME, DB_USER, DB_PASS);
     $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $sql = 'SELECT * FROM city where true';
+    // Consulta para obtener el total de registros
+    $sql = 'SELECT count(*) FROM city where true';
+
     $arr_params = array();
+    $sql_filters = "";
 
     // Restricciones para la consulta
     if (!empty($id)) {
-        $sql .= " and id=:id";
+        $sql_filters .= " and id=:id";
         $arr_params[":id"] = $id;
     }
 
     if (!empty($name)) {
-        $sql .= " and name like :name";
+        $sql_filters .= " and name like :name";
         $arr_params[":name"] = "%".$name."%";
     }
 
     if (!empty($countryCode)) {
-        $sql .= " and countryCode like :countryCode";
+        $sql_filters .= " and countryCode like :countryCode";
         $arr_params[":countryCode"] = "%".$countryCode."%";
     }
 
     if (!empty($district)) {
-        $sql .= " and district like :district";
+        $sql_filters .= " and district like :district";
         $arr_params[":district"] = "%".$district."%";
     }
 
     if (!empty($population)) {
-        $sql .= " and population".$population_sign.":population";
+        $sql_filters .= " and population".$population_sign.":population";
         $arr_params[":population"] = $population;
     }
 
-    // echo "<pre>";
-    // print_r($arr_params);
-    // echo "</pre>";
-    // exit();
+
+    $sql .= $sql_filters;
+    //echo $sql;exit();
+
+    $stmt = $con->prepare($sql);
+    $stmt->execute($arr_params);
+    $result = $stmt->fetch();
+    $total_registros = $result[0];
+
+
+    // Cálculo de Acciones
+    $paginas = ceil($total_registros/$num_registros);
+    if ($primero) $pagina = 1;
+    if ($ultimo) $pagina = $paginas;
+    if ($siguiente && $pagina<$paginas) $pagina++;
+    if ($anterior && $pagina>1) $pagina--;
+    if ($mostrar) $pagina = 1;
+
+
+    // Consulta para mostrar los datos
+    $sql = 'SELECT * FROM city where true';
+    $sql .= $sql_filters;
+
+    if ($num_registros != "todos")
+        $sql .= " limit ".($num_registros*($pagina-1)) .",". $num_registros;
+    //echo $sql;exit();
 
     $stmt = $con->prepare($sql);
     $stmt->execute($arr_params);
