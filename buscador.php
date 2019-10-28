@@ -1,4 +1,5 @@
 <?php
+require_once "inc/auth.inc.php";
 
 // Definición de variables por si no lo hace el archivo padre donde se incluya
 $id = isset($id)? $id : null;

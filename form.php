@@ -1,5 +1,6 @@
 <?php
-require_once "conf.php";
+require "inc/auth.inc.php";
+require "conf.php";
 
 // echo "<pre>";
 // print_r($_POST);
@@ -15,7 +16,7 @@ $population = null;
 
 if (isset($_GET['ID']) && !empty($_GET['ID'])) {
 	try {
-		$con = new PDO('mysql:host=localhost;dbname='.DB_NAME, DB_USER, DB_PASS);
+		$con = new PDO('mysql:host=localhost;dbname='.DB_NAME.';charset='.DB_CHARSET, DB_USER, DB_PASS);
 		$con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 		$stmt = $con->prepare('SELECT * FROM city where id=:id');
@@ -42,7 +43,7 @@ if (isset($_GET['ID']) && !empty($_GET['ID'])) {
 	<link rel="stylesheet" type="text/css" href="css/form.css">
 </head>
 <body>
-<h1>Práctica DI 1.1</h1>
+<h1>Práctica DI 2.1</h1>
 <nav>
 	<form action="index.php" method="POST">
 		<input type="submit" name="list" value="Listado" />

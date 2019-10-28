@@ -1,4 +1,5 @@
 <?php
+require_once "inc/auth.inc.php";
 require_once "conf.php";
 
 // Definición de variables por si no lo hace el archivo padre donde se incluya
@@ -21,7 +22,7 @@ $mostrar = (isset($_POST['mostrar'])? true : false);
 
 try {
     // Conexión a BD
-    $con = new PDO('mysql:host=localhost;dbname='.DB_NAME, DB_USER, DB_PASS);
+    $con = new PDO('mysql:host=localhost;dbname='.DB_NAME.';charset='.DB_CHARSET, DB_USER, DB_PASS);
     $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Consulta para obtener el total de registros

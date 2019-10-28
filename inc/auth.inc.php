@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-if (!isset($_SESSION['id_usuario'])) {
-	echo "No estás logueado";
-	exit();
+if (!isset($_SESSION['user'])) {
+    header("Location: login.php");
+    exit();
 }

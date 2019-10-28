@@ -1,4 +1,5 @@
-<?php 
+<?php
+require_once "inc/auth.inc.php";
 require_once "conf.php";
 
 // echo "<pre>";
@@ -14,7 +15,7 @@ $population = isset($_POST['Population'])? $_POST['Population'] : null;
 
 
 try {
-	$con = new PDO('mysql:host=localhost;dbname='.DB_NAME, DB_USER, DB_PASS);
+	$con = new PDO('mysql:host=localhost;dbname='.DB_NAME.';charset='.DB_CHARSET, DB_USER, DB_PASS);
 	$con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 	if (!empty($id)) {

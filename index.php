@@ -1,5 +1,6 @@
 <?php
-require_once "conf.php";
+require "inc/auth.inc.php";
+require "conf.php";
 
 // Recogida de parámetros GET para eliminar
 $id = isset($_GET['ID'])? $_GET['ID'] : null;
@@ -8,7 +9,7 @@ $id = isset($_GET['ID'])? $_GET['ID'] : null;
 // Para eliminar
 if (!empty($id)) {
 	try {
-		$con = new PDO('mysql:host=localhost;dbname='.DB_NAME, DB_USER, DB_PASS);
+		$con = new PDO('mysql:host=localhost;dbname='.DB_NAME.';charset='.DB_CHARSET, DB_USER, DB_PASS);
 		$con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 		// Delete
@@ -46,19 +47,20 @@ if (!empty($id)) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Listado práctica DI 1.3</title>
+	<title>Listado práctica DI 2.1</title>
 	<link rel="stylesheet" type="text/css" href="css/index.css">
 	<link rel="stylesheet" type="text/css" href="css/list.css">
     <link rel="stylesheet" type="text/css" href="css/buscador.css">
     <link rel="stylesheet" type="text/css" href="css/paginador.css">
 </head>
 <body>	
-	<h1>Práctica DI 1.3</h1>
+	<h1>Práctica DI 2.1</h1>
 	
 	<nav>
 		<form action="form.php" method="POST">
 			<input type="submit" name="Nueva" value="nueva" />
 		</form>
+        <a href="logout.php">Cerrar sesi&oacute;n</a>
 	</nav>
 
     <!-- Se abre aquí el formulario para que abarque el buscador y el paginador, si no uno no tendría la información de ambos -->
